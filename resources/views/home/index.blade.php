@@ -49,7 +49,7 @@
 </section>
 
 {{-- =================== HOT TOPICS SECTION =================== --}}
-<section class="bg-[#8B0000] py-5">
+<section class="bg-[#8B0000] py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Label "Hot Topics" di atas --}}
         <div class="mb-6 flex justify-center">
@@ -462,10 +462,8 @@
 </section>
 
 {{-- =================== ACHIEVEMENT / RECOGNITION SECTION =================== --}}
-<section class="relative py-16 overflow-hidden"
-    style="background-color: #8B0000">
-
-    {{-- Background decorative pattern (subtle circular shapes) --}}
+<section class="relative py-16 overflow-hidden" style="background-color: #8B0000">
+{{-- Background decorative pattern (subtle circular shapes) --}}
     <div class="absolute inset-0 opacity-10 pointer-events-none">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
             style="background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);">
@@ -566,94 +564,82 @@
                     </div>
                 @endforeach
             </div>
-
         </div>
     </div>
 </section>
 
 {{-- =================== KAMPUS CABANG SECTION =================== --}}
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-[#F8F9FA]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between mb-10">
-            <div>
-                <p class="text-xs text-[#8B0000] font-semibold uppercase tracking-wider mb-1">Terkini</p>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900">Berita & Artikel</h2>
-            </div>
-            <a href="/berita" class="hidden sm:inline-flex items-center gap-1 text-sm text-[#8B0000] font-semibold hover:underline">
-                Lihat Semua
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
+
+        {{-- Judul --}}
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950">
+                Daftar Kampus Cabang
+            </h2>
         </div>
 
-        @if(isset($latestNews) && $latestNews->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach($latestNews as $article)
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-reveal group">
-                        <div class="h-44 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                            @if($article->thumbnail)
-                                <img src="{{ Storage::url($article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            @else
-                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#8B0000]/10 to-[#C0392B]/20">
-                                    <svg class="w-12 h-12 text-[#8B0000]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="p-5">
-                            @if($article->category)
-                                <span class="inline-block px-2 py-0.5 bg-red-50 text-[#8B0000] text-xs font-semibold rounded-md mb-2">{{ $article->category->name }}</span>
-                            @endif
-                            <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#8B0000] transition-colors line-clamp-2">{{ $article->title }}</h3>
-                            <p class="text-gray-400 text-xs leading-relaxed mb-3 line-clamp-2">{{ $article->excerpt }}</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-400 text-xs">{{ $article->published_at?->translatedFormat('d M Y') }}</span>
-                                <a href="/berita/{{ $article->slug }}" class="text-xs text-[#8B0000] font-semibold hover:underline">Baca →</a>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-        @else
-            <!-- Placeholder cards when no news -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @php
-                    $placeholderNews = [
-                        ['title' => 'Telkom University Luncurkan Program Satu Data', 'desc' => 'Direktorat PuTI resmi meluncurkan portal Satu Data sebagai langkah maju dalam transformasi digital universitas.', 'category' => 'Pengumuman', 'date' => '15 Jul 2025'],
-                        ['title' => 'Workshop Data Governance bagi Data Owner', 'desc' => 'Workshop intensif tentang tata kelola data dihadiri seluruh Data Owner dari 20 direktorat di Telkom University.', 'category' => 'Kegiatan', 'date' => '10 Jul 2025'],
-                        ['title' => 'Implementasi Perpres Satu Data di Perguruan Tinggi', 'desc' => 'Artikel opini tentang bagaimana perguruan tinggi mengimplementasikan regulasi Satu Data Indonesia.', 'category' => 'Artikel', 'date' => '5 Jul 2025'],
-                    ];
-                @endphp
-                @foreach($placeholderNews as $news)
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-reveal group">
-                        <div class="h-44 bg-gradient-to-br from-[#8B0000]/10 to-[#C0392B]/20 flex items-center justify-center">
-                            <svg class="w-12 h-12 text-[#8B0000]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                            </svg>
-                        </div>
-                        <div class="p-5">
-                            <span class="inline-block px-2 py-0.5 bg-red-50 text-[#8B0000] text-xs font-semibold rounded-md mb-2">{{ $news['category'] }}</span>
-                            <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#8B0000] transition-colors">{{ $news['title'] }}</h3>
-                            <p class="text-gray-400 text-xs leading-relaxed mb-3">{{ $news['desc'] }}</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-400 text-xs">{{ $news['date'] }}</span>
-                                <a href="/berita" class="text-xs text-[#8B0000] font-semibold hover:underline">Baca →</a>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-        @endif
+        {{-- Grid 2 kolom --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @php
+                $campuses = [
+                    [
+                        'label'   => 'Kampus Pusat',
+                        'name'    => 'Telkom University Bandung',
+                        'address' => 'Jl. Telekomunikasi Terusan Buahbatu No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257',
+                        'image'   => '/images/telu-bdg.png',
+                    ],
+                    [
+                        'label'   => 'Kampus Cabang 1',
+                        'name'    => 'Telkom University Jakarta',
+                        'address' => 'Jl. Raya Daan Mogot No.KM. 11, RW.4, Kedaung Kali Angke, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11710',
+                        'image'   => '/images/telu-jkt.png',
+                    ],
+                    [
+                        'label'   => 'Kampus Cabang 2',
+                        'name'    => 'Telkom University Surabaya',
+                        'address' => 'Jl. Ketintang No.156, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231',
+                        'image'   => '/images/telu-sby.png',
+                    ],
+                    [
+                        'label'   => 'Kampus Cabang 3',
+                        'name'    => 'Telkom University Purwokerto',
+                        'address' => 'Jl. DI Panjaitan No.128, Karangreja, Purwokerto Kidul, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53147',
+                        'image'   => '/images/telu-pwk.png',
+                    ],
+                ];
+            @endphp
 
-        <div class="text-center mt-8 sm:hidden">
-            <a href="/berita" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-[#8B0000] text-[#8B0000] font-semibold rounded-xl hover:bg-red-50 transition-all duration-200">
-                Lihat Semua Berita
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
+            @foreach($campuses as $campus)
+                <div class="flex bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+
+                    {{-- Foto Kampus --}}
+                    <div class="w-[200px] md:w-[220px] flex-shrink-0">
+                        <img
+                            src="{{ $campus['image'] }}"
+                            alt="Foto {{ $campus['name'] }}"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                    {{-- Info Kampus --}}
+                    <div class="flex flex-col justify-center px-6 py-5 gap-1">
+                        {{-- Label --}}
+                        <span class="text-gray-400 text-xs font-normal tracking-wide">
+                            {{ $campus['label'] }}
+                        </span>
+                        {{-- Nama --}}
+                        <h3 class="text-gray-900 text-lg md:text-xl font-bold leading-snug mt-1">
+                            {{ $campus['name'] }}
+                        </h3>
+                        {{-- Alamat --}}
+                        <p class="text-gray-500 text-sm leading-relaxed mt-2">
+                            {{ $campus['address'] }}
+                        </p>
+                    </div>
+
+                </div>
+            @endforeach
+
         </div>
     </div>
 </section>

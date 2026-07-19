@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100" x-data="{ mobileOpen: false }">
-    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py- px-4 sm:px-6 lg:px-8">
         {{-- Layout: 3-kolom flex: logo | menu-tengah | aksi-kanan --}}
         <div class="flex items-center h-16">
 
@@ -37,13 +37,11 @@
                     <div class="absolute top-full left-0 mt-1 w-44 bg-white rounded-xl shadow-xl border border-gray-100 py-1.5
                                 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                                 transition-all duration-200 z-50">
-                        <a href="/tentang" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-red-50 hover:text-[#C0392B] transition-colors">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#C0392B] opacity-60"></span>
-                            Tentang Satu Data
+                        <a href="/organisasi" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-red-50 hover:text-[#C0392B] transition-colors">
+                            Organisasi
                         </a>
-                        <a href="/profil" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-red-50 hover:text-[#C0392B] transition-colors">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#C0392B] opacity-60"></span>
-                            Profil PuTI
+                        <a href="/kebijakan-privasi" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-red-50 hover:text-[#C0392B] transition-colors">
+                            Kebijakan Privasi
                         </a>
                     </div>
                 </div>
@@ -131,8 +129,8 @@
 
         <div class="px-4 py-3 space-y-0.5">
             <a href="/" class="block px-3 py-2 text-sm font-semibold text-[#C0392B] bg-red-50 rounded-lg">Home</a>
-            <a href="/tentang" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Tentang Satu Data</a>
-            <a href="/profil" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Profil PuTI</a>
+            <a href="/organisasi" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Organisasi</a>
+            <a href="/kebijakan-privasi" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Kebijakan Privasi</a>
             <a href="/data-owner" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Data Owner</a>
             <a href="/data-governance" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Data Governance</a>
             <a href="/katalog-dataset" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Dataset</a>

@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100" x-data="{ mobileOpen: false }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
         {{-- Layout: 3-kolom flex: logo | menu-tengah | aksi-kanan --}}
         <div class="flex items-center h-16">
 
@@ -10,7 +10,7 @@
                     <img
                         src="/images/sd-logo.png"
                         alt="SD Logo"
-                        class="h-10 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
+                        class="h-16 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
                     >
                 </a>
             </div>

@@ -53,7 +53,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Label "Hot Topics" di atas --}}
         <div class="mb-6 flex justify-center">
-            <span class="text-white text-center font-bold text-base tracking-wide">Hot Topics</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                Hot Topics
+            </h2>
         </div>
 
         {{-- Topic tags di bawah --}}
@@ -212,7 +214,7 @@
 </section>
 
 {{-- =================== VISI MISI SECTION =================== --}}
-<section class="relative py-24 bg-[#F8F9FA] overflow-hidden">
+<section class="relative py-16 bg-[#F8F9FA] overflow-hidden">
 
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
 
@@ -334,74 +336,242 @@
     </div>
 </section>
 
-{{-- =================== QUICK LINKS SECTION =================== --}}
-<section class="py-16 bg-white">
+{{-- =================== FAKULTAS & DIREKTORAT SECTION =================== --}}
+<section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-2">Layanan & Informasi</h2>
-            <p class="text-gray-500 text-sm">Akses cepat ke seluruh layanan portal Satu Data</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-2">Fakultas dan Direktorat</h2>
+            <div class="flex-1 flex justify-end">
+        <a href="/berita"
+            class="hidden sm:inline-flex items-center gap-1 text-sm text-[#8B0000] font-semibold hover:underline">
+            Lihat Semua
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </a>
+    </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @php
-                $services = [
+                $faculties = [
                     [
-                        'title' => 'Data Owner',
-                        'desc' => 'Temukan penanggung jawab data dari setiap direktorat dan unit kerja',
-                        'url' => '/data-owner',
-                        'color' => 'bg-blue-50 border-blue-100',
-                        'iconBg' => 'bg-blue-500',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>',
+                        'title' => 'Fakultas Ilmu Terapan',
+                        'image' => '/images/logo-fit.png',
+                        'url' => '/fakultas/ilmu-terapan',
                     ],
                     [
-                        'title' => 'Katalog Dataset',
-                        'desc' => 'Jelajahi katalog dataset yang tersedia di seluruh unit kerja universitas',
-                        'url' => '/katalog-dataset',
-                        'color' => 'bg-green-50 border-green-100',
-                        'iconBg' => 'bg-green-500',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>',
+                        'title' => 'Fakultas Komunikasi dan ilmu Sosial',
+                        'image' => '/images/logo-fks.png',
+                        'url' => '/fakultas/komunikasi-ilmu-sosial',
                     ],
                     [
-                        'title' => 'Data Governance',
-                        'desc' => 'Pahami alur dan kebijakan tata kelola data di Telkom University',
-                        'url' => '/data-governance',
-                        'color' => 'bg-purple-50 border-purple-100',
-                        'iconBg' => 'bg-purple-500',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>',
+                        'title' => 'Fakultas Informatika',
+                        'image' => '/images/logo-fif.png',
+                        'url' => '/fakultas/informatika',
                     ],
                     [
-                        'title' => 'Berita & Artikel',
-                        'desc' => 'Informasi terkini seputar pengelolaan data dan inovasi teknologi',
-                        'url' => '/berita',
-                        'color' => 'bg-orange-50 border-orange-100',
-                        'iconBg' => 'bg-orange-500',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>',
+                        'title' => 'Fakultas Rekayasa Industri',
+                        'image' => '/images/logo-fri.png',
+                        'url' => '/fakultas/rekayasa-industri',
+                    ],
+                    [
+                        'title' => 'Fakultas Teknik Elektro',
+                        'image' => '/images/logo-fte.png',
+                        'url' => '/fakultas/teknik-elektro',
+                    ],
+                    [
+                        'title' => 'Fakultas Industri Kreatif',
+                        'image' => '/images/logo-fik.png',
+                        'url' => '/fakultas/industri-kreatif',
+                    ],
+                    [
+                        'title' => 'Fakultas Ekonomi dan Bisnis',
+                        'image' => '/images/logo-feb.png',
+                        'url' => '/fakultas/ekonomi-bisnis',
+                    ],
+                    [
+                        'title' => 'Direktorat Akademik',
+                        'image' => '/images/logo-telu.png',
+                        'url' => '/direktorat/akademik',
+                    ],
+                    [
+                        'title' => 'Direktorat Kampus Purwokerto',
+                        'image' => '/images/logo-dir-telupwk.png',
+                        'url' => '/direktorat/kampus-purwokerto',
+                    ],
+                    [
+                        'title' => 'Direktorat Kampus Jakarta',
+                        'image' => '/images/logo-dir-telujkt.webp',
+                        'url' => '/direktorat/kampus-jakarta',
+                    ],
+                    [
+                        'title' => 'Direktorat Kampus Surabaya',
+                        'image' => '/images/logo-dir-telusby.webp',
+                        'url' => '/direktorat/kampus-surabaya',
+                    ],
+                    [
+                        'title' => 'Direktorat Aset dan Sustainability',
+                        'image' => '/images/logo-telu.png',
+                        'url' => '/direktorat/aset-sustainability',
+                    ],
+                    [
+                        'title' => 'Direktorat Bandung Techno Park',
+                        'image' => '/images/logo-dir-btp.png',
+                        'url' => '/direktorat/bandung-techno-park',
+                    ],
+                    [
+                        'title' => 'Direktorat Keuangan',
+                        'image' => '/images/logo-dir-kug.png',
+                        'url' => '/direktorat/keuangan',
+                    ],
+                    [
+                        'title' => 'Direktorat Pemasaran dan Admisi',
+                        'image' => '/images/logo-telu.png',
+                        'url' => '/direktorat/pemasaran-admisi',
+                    ],
+                    [
+                        'title' => 'Direktorat Pengelola Dana Abadi',
+                        'image' => '/images/logo-dir-pda.png',                        'url' => '/direktorat/pengelola-dana-abadi',
                     ],
                 ];
             @endphp
-            @foreach($services as $service)
-                <a href="{{ $service['url'] }}"
-                    class="group block p-6 bg-white rounded-2xl border {{ $service['color'] }} shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-reveal">
-                    <div class="w-12 h-12 {{ $service['iconBg'] }} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {!! $service['icon'] !!}
-                        </svg>
+
+            @foreach($faculties as $item)
+                <a href="{{ $item['url'] }}"
+                    class="group block p-6 bg-white rounded-2xl border border-gray-150 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col items-center justify-between min-h-[160px] scroll-reveal">
+                    
+                    {{-- Container Image Logo Resmi --}}
+                    <div class="w-full flex-1 flex items-center justify-center mb-4">
+                        <img 
+                            src="{{ $item['image'] }}" 
+                            alt="Logo {{ $item['title'] }}" 
+                            class="max-h-16 max-w-[85%] object-contain filter group-hover:brightness-95 transition-all duration-200"
+                        >
                     </div>
-                    <h3 class="font-bold text-gray-900 mb-2">{{ $service['title'] }}</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed mb-3">{{ $service['desc'] }}</p>
-                    <span class="inline-flex items-center gap-1 text-xs font-semibold text-[#8B0000] group-hover:gap-2 transition-all duration-200">
-                        Selengkapnya
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
-                    </span>
+
+                    {{-- Nama Entitas (Fakultas / Direktorat) --}}
+                    <h3 class="font-bold text-gray-800 text-sm text-center tracking-tight leading-snug group-hover:text-red-700 transition-colors duration-200">
+                        {{ $item['title'] }}
+                    </h3>
                 </a>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- =================== BERITA TERBARU SECTION =================== --}}
+{{-- =================== ACHIEVEMENT / RECOGNITION SECTION =================== --}}
+<section class="relative py-16 overflow-hidden"
+    style="background-color: #8B0000">
+
+    {{-- Background decorative pattern (subtle circular shapes) --}}
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+            style="background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);">
+        </div>
+        {{-- Subtle diagonal line pattern --}}
+        <div class="absolute inset-0"
+            style="background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 1px,
+                transparent 1px,
+                transparent 12px
+            );">
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+        {{-- ── Judul dengan dekorasi padi ── --}}
+        <div class="flex items-center justify-center gap-4 mb-2">
+            <img src="/images/achiev-asset/padi-kiri.png"
+                alt="padi kiri"
+                class="h-16 md:h-20 w-auto object-contain opacity-90 -scale-x-100">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
+                International Recognitions
+            </h2>
+            <img src="/images/achiev-asset/padi-kanan.png"
+                alt="padi kanan"
+                class="h-16 md:h-20 w-auto object-contain opacity-90">
+        </div>
+
+        {{-- Subtitle --}}
+        <p class="text-red-200 text-sm md:text-base mb-10 leading-relaxed">
+            As a Research and Entrepreneurial University <br>
+            Telkom University is welk-known throughout the world
+        </p>
+
+        {{-- ── Logo rows ── --}}
+        <div class="space-y-8 md:space-y-10">
+
+            {{-- Baris 1 — Logo utama (Tut Wuri, Dikti, Tel-U) --}}
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                @foreach([
+                    ['name' => 'Kemendikbud Ristek',        'img' => 'logo-tut-wuri.png'],
+                    ['name' => 'Diktisaintek Berdampak',    'img' => 'logo-dikti.png'],
+                    ['name' => 'Telkom University',         'img' => 'logo-telu.png'],
+                ] as $logo)
+                    <div class="flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                        <img src="/images/achiev-asset/{{ $logo['img'] }}"
+                            alt="{{ $logo['name'] }}"
+                            class="h-14 md:h-16 w-auto object-contain drop-shadow-lg">
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Separator tipis --}}
+            <div class="w-48 mx-auto border-t border-white/10"></div>
+
+            {{-- Baris 2 — Pemeringkatan Global (THE, QS World, UI GreenMetric, Webometrics, AppliedHE) --}}
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                @foreach([
+                    ['name' => 'Times Higher Education',        'img' => 'logo-the.png'],
+                    ['name' => 'QS World University Rankings',  'img' => 'logo-qs-world.png'],
+                    ['name' => 'UI GreenMetric',                'img' => 'logo-uigm.png'],
+                    ['name' => 'Webometrics',                   'img' => 'logo-webometrics.png'],
+                    ['name' => 'AppliedHE',                     'img' => 'logo-appliedhe.png'],
+                ] as $logo)
+                    <div class="flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                        <img src="/images/achiev-asset/{{ $logo['img'] }}"
+                            alt="{{ $logo['name'] }}"
+                            class="h-12 md:h-14 w-auto object-contain drop-shadow-md">
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Separator tipis --}}
+            <div class="w-48 mx-auto border-t border-white/10"></div>
+
+            {{-- Baris 3 — Sertifikasi & Akreditasi Internasional --}}
+            <div class="flex flex-wrap items-center justify-center gap-5 md:gap-8">
+                @foreach([
+                    ['name' => 'QS Star Rating',        'img' => 'logo-qs.png'],
+                    ['name' => 'BSI ISO 27001',          'img' => 'logo-bsi-27001.png'],
+                    ['name' => 'BSI ISO 20000-1',        'img' => 'logo-bsi-20000-1.png'],
+                    ['name' => 'BSI ISO 21001',          'img' => 'logo-bsi-21001.png'],
+                    ['name' => 'IABEE',                  'img' => 'logo-iabee.png'],
+                    ['name' => 'ABEST21',                'img' => 'logo-abest21.png'],
+                    ['name' => 'ASIC',                   'img' => 'logo-asic.png'],
+                    ['name' => 'AQAS',                   'img' => 'logo-aqas.png'],
+                    ['name' => 'UNWTO Certified',        'img' => 'logo-unwto.png'],
+                    ['name' => 'AUN-QA',                 'img' => 'logo-aun-qa.png'],
+                    ['name' => 'ACEEU',                  'img' => 'logo-aceeu.png'],
+                ] as $logo)
+                    <div class="flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                        <img src="/images/achiev-asset/{{ $logo['img'] }}"
+                            alt="{{ $logo['name'] }}"
+                            class="h-10 md:h-12 w-auto object-contain drop-shadow-sm">
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- =================== KAMPUS CABANG SECTION =================== --}}
 <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-end justify-between mb-10">
@@ -483,38 +653,6 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- =================== CTA BANNER SECTION =================== --}}
-<section class="bg-gradient-to-r from-[#8B0000] to-[#6B0000] py-14 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-1/4 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-48 h-48 bg-white rounded-full blur-2xl"></div>
-    </div>
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">
-            Mulai Jelajahi Ekosistem Data Telkom University
-        </h2>
-        <p class="text-red-200 text-sm mb-8 max-w-xl mx-auto">
-            Temukan ratusan dataset, pelajari struktur Data Owner, dan pahami alur Data Governance universitas dalam satu portal terpadu.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/katalog-dataset"
-                class="inline-flex items-center justify-center gap-2 px-7 py-3 bg-white text-[#8B0000] font-bold rounded-xl hover:bg-red-50 transition-all duration-200 shadow-lg hover:shadow-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
-                </svg>
-                Jelajahi Katalog Dataset
-            </a>
-            <a href="/data-owner"
-                class="inline-flex items-center justify-center gap-2 px-7 py-3 bg-white/10 text-white font-semibold rounded-xl border border-white/30 hover:bg-white/20 transition-all duration-200">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                Lihat Data Owner
             </a>
         </div>
     </div>

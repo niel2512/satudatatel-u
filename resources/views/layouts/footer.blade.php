@@ -4,15 +4,15 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Brand -->
             <div class="lg:col-span-1">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#8B0000] to-[#C0392B] rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">SD</span>
-                    </div>
-                    <div>
-                        <div class="font-bold text-white text-sm">Satu Data</div>
-                        <div class="text-gray-400 text-xs">Telkom University</div>
-                    </div>
-                </div>
+                <div class="flex-none">
+                <a href="/" class="flex items-center gap-2 group">
+                    <img
+                        src="/images/sd-logo.png"
+                        alt="SD Logo"
+                        class="h-16 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
+                    >
+                </a>
+            </div>
                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
                     Portal terpusat informasi dan tata kelola data Universitas Telkom.
                 </p>

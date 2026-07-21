@@ -45,3 +45,7 @@ Route::get('/berita', function () {
 Route::get('/berita/{slug}', function ($slug) {
     return redirect('/');
 })->name('news.show');
+
+Route::get('/kebijakan-privasi', function () {
+    return view('kebijakan-privasi.index');
+})->name('kebijakan-privasi');

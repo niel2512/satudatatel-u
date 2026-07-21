@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrganisasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,6 +11,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/organisasi', [OrganisasiController::class, 'index'])->name('organisasi');
 
 // Stub routes — akan diimplementasi di iterasi berikutnya
 Route::get('/tentang', function () {

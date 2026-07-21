@@ -63,15 +63,15 @@
         {{-- Leader Card — di tengah, lebar sedang --}}
         <div class="flex justify-center mb-8">
             <div class="scroll-reveal w-64 md:w-72">
-                <div class="rounded-t-2xl overflow-hidden bg-gray-200 shadow-md" style="height: 320px;">
+                <div class="overflow-hidden bg-gray-200 shadow-md">
                     <img
                         src="{{ $teamLeader['photo'] }}"
                         alt="{{ $teamLeader['name'] }}"
                         class="w-full h-full object-cover object-top"
-                        onerror="this.src='https://placehold.co/288x320/e5e7eb/9ca3af?text=Photo'"
+                        onerror="this.src='https://placehold.co/600x800/e5e7eb/9ca3af?text=Photo'"
                     >
                 </div>
-                <div class="bg-[#8B0000] rounded-b-2xl px-4 py-3 text-center">
+                <div class="bg-[#8B0000] px-4 py-4 mt-auto text-center">
                     <p class="text-white text-sm font-bold leading-tight">{{ $teamLeader['name'] }}</p>
                     <p class="text-red-200 text-xs mt-0.5">{{ $teamLeader['role'] }}</p>
                 </div>

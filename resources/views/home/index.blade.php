@@ -230,7 +230,6 @@
                 </p>
             </div>
 
-            {{-- [EDIT] Visi Typo — stacking via CSS grid, bukan absolute --}}
             <div class="scroll-reveal flex justify-center md:justify-end pr-4 md:pr-12">
                 <div class="relative flex items-end">
                     {{-- Outline (belakang) --}}
@@ -258,8 +257,6 @@
 
         {{-- ── MISI ROW ── --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-
-            {{-- [EDIT] Misi Typo --}}
             <div class="scroll-reveal flex justify-center md:justify-start pl-6 md:pl-16 order-2 md:order-1">
                 <div class="relative flex items-end">
                     {{-- Outline (belakang) --}}
@@ -342,7 +339,7 @@
         <div class="text-center mb-10">
             <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-2">Fakultas dan Direktorat</h2>
             <div class="flex-1 flex justify-end">
-        <a href="/berita"
+        <a href="/data-owner"
             class="hidden sm:inline-flex items-center gap-1 text-sm text-[#8B0000] font-semibold hover:underline">
             Lihat Semua
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -486,7 +483,7 @@
         <div class="flex items-center justify-center gap-4 mb-2">
             <img src="/images/achiev-asset/padi-kiri.png"
                 alt="padi kiri"
-                class="h-16 md:h-20 w-auto object-contain opacity-90 -scale-x-100">
+                class="h-16 md:h-20 w-auto object-contain opacity-90">
             <h2 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
                 International Recognitions
             </h2>
@@ -545,7 +542,7 @@
             {{-- Baris 3 — Sertifikasi & Akreditasi Internasional --}}
             <div class="flex flex-wrap items-center justify-center gap-5 md:gap-8">
                 @foreach([
-                    ['name' => 'QS Star Rating',        'img' => 'logo-qs.png'],
+                    ['name' => 'QS Star Rating',         'img' => 'logo-qs.png'],
                     ['name' => 'BSI ISO 27001',          'img' => 'logo-bsi-27001.png'],
                     ['name' => 'BSI ISO 20000-1',        'img' => 'logo-bsi-20000-1.png'],
                     ['name' => 'BSI ISO 21001',          'img' => 'logo-bsi-21001.png'],
@@ -611,18 +608,18 @@
             @endphp
 
             @foreach($campuses as $campus)
-                <div class="flex bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="flex flex-wrap bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
 
-                    {{-- Foto Kampus --}}
-                    <div class="w-[200px] md:w-[220px] flex-shrink-0">
+                    {{-- Foto Kampus — disembunyikan di mobile, tampil mulai md --}}
+                    <div class="hidden md:block w-[220px] flex-shrink-0">
                         <img
                             src="{{ $campus['image'] }}"
                             alt="Foto {{ $campus['name'] }}"
                             class="w-full h-full object-cover">
                     </div>
 
-                    {{-- Info Kampus --}}
-                    <div class="flex flex-col justify-center px-6 py-5 gap-1">
+                    {{-- Info Kampus — full width di mobile --}}
+                    <div class="flex flex-col justify-center px-6 py-5 gap-1 flex-1">
                         {{-- Label --}}
                         <span class="text-gray-400 text-xs font-normal tracking-wide">
                             {{ $campus['label'] }}

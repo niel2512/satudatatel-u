@@ -128,7 +128,7 @@
         </div>
 
         <div class="px-4 py-3 space-y-0.5">
-            <a href="/" class="block px-3 py-2 text-sm font-semibold text-[#C0392B] bg-red-50 rounded-lg">Home</a>
+            <a href="/" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#C0392B] hover:bg-red-50 rounded-lg">Home</a>
             <a href="/organisasi" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Organisasi</a>
             <a href="/kebijakan-privasi" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Kebijakan Privasi</a>
             <a href="/data-owner" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-[#C0392B] rounded-lg">Data Owner</a>

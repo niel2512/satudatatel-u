@@ -5,23 +5,17 @@
 
 @section('content')
 
-{{-- ── Hero / Page Header ── --}}
-<section class="pt-16">
-    <div class="max-w-4xl mx-auto mb-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-extrabold text-[#8B0000] tracking-tight">
+{{-- ── Halaman Kebijakan Privasi ── --}}
+<section class="bg-gray-50 pt-16 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h1 class="text-2xl font-extrabold text-[#8B0000] tracking-tight mb-6">
             Pemberitahuan Privasi
         </h1>
-    </div>
-</section>
-
-{{-- ── Konten Utama ── --}}
-<section class="bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
         <div class="bg-white rounded-2xl shadow-sm px-8 py-10 md:px-14 md:py-14 space-y-12 text-gray-700 text-sm leading-relaxed">
 
             {{-- 1. Pendahuluan --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Pendahuluan</h2>
                 <p class="mb-4">
                     Kami menggunakan Pemberitahuan Privasi ini untuk mengungkapkan praktik privasi pada Telkom University (Tel-U) sesuai dengan peraturan berlaku, yaitu Undang-Undang Nomor 19 Tahun 2019 tentang Informasi dan Transaksi Elektronik, dan Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik. Kami bertujuan untuk membantu Anda dalam memahami Data Pribadi apa yang Kami kumpulkan, bagaimana Kami menggunakannya, dan kontrol apa yang Anda miliki atas hal tersebut. Pemberitahuan ini berlaku untuk data yang dikumpulkan dari <a href="https://www.telkomuniversity.ac.id" class="text-[#8B0000] underline" target="_blank">www.telkomuniversity.ac.id</a> dan seluruh subdomainnya. Pemberitahuan ini akan memperbarui hal-hal berikut:
@@ -40,7 +34,7 @@
             <hr class="border-gray-100">
 
             {{-- 2. Tentang Kami --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Tentang Kami</h2>
                 <p class="mb-4">
                     Telkom University (Tel-U) adalah perguruan tinggi swasta berbadan hukum yang berada di Kota Bandung, Republik Indonesia. Misi Tel-U adalah menjadi perguruan tinggi yang terkenal, berkembang, dan bertanggung jawab dalam meningkatkan kualitas sumber daya manusia dan teknologi informasi, dan Anda diminta untuk mencapai ini melalui pengelolaan dan penggunaan Data Pribadi Anda.
@@ -56,7 +50,7 @@
             <hr class="border-gray-100">
 
             {{-- 3. Data Yang Dikumpulkan --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Data Yang Dikumpulkan</h2>
                 <p class="mb-5">
                     Kami memiliki beberapa data yang Anda berikan secara sukarela melalui email, telepon, formulir, pesan singkat, pendaftaran pengguna, dan survei. Kami mengumpulkan jenis data sebagai berikut:
@@ -103,7 +97,7 @@
             <hr class="border-gray-100">
 
             {{-- 4. Bagaimana Kami Menggunakan Data --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Bagaimana Kami Menggunakan Data Anda</h2>
                 <p class="mb-4">Data Pribadi Anda dapat digunakan untuk tujuan berikut:</p>
                 <ul class="space-y-2 text-gray-600">
@@ -133,7 +127,7 @@
             <hr class="border-gray-100">
 
             {{-- 5. Dasar Hukum Pemrosesan --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Dasar Hukum Pemrosesan</h2>
                 <p class="mb-4">Kami memproses Data Pribadi untuk satu atau beberapa alasan berikut:</p>
                 <div class="space-y-4">
@@ -155,7 +149,7 @@
             <hr class="border-gray-100">
 
             {{-- 6. Bagaimana Kami Melindungi Data --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Bagaimana Kami Melindungi Data Anda</h2>
                 <ul class="space-y-2 text-gray-600">
                     @foreach([
@@ -177,7 +171,7 @@
             <hr class="border-gray-100">
 
             {{-- 7. Hak Anda --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Hak Anda Terkait Data Pribadi Anda</h2>
                 <p class="mb-4">Dalam kasus tertentu, Anda memiliki hak untuk hal-hal berikut:</p>
                 <ul class="space-y-2 text-gray-600">
@@ -205,7 +199,7 @@
             <hr class="border-gray-100">
 
             {{-- 8. Informasi Kontak --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Informasi Kontak</h2>
                 <p class="mb-5">
                     Untuk pertanyaan, masalah, atau permintaan untuk menggunakan Hak Anda yang dijelaskan dalam Pemberitahuan Privasi ini, silakan hubungi Kami melalui:
@@ -235,7 +229,7 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-400 mb-0.5">Alamat</p>
-                            <p class="text-sm font-medium text-gray-800">Jl. Djuanda (Ir. H. Djuanda St.), Kota Bandung, Jawa Barat Indonesia 40257, Bandung, Indonesia</p>
+                            <p class="text-sm font-medium text-gray-800">Gedung Bangkit Telkom University Jl. Telekomunikasi No. 1, Terusan Buah Batu, Bandung, Jawa Barat 40257, Indonesia </p>
                         </div>
                     </div>
                 </div>
@@ -244,7 +238,7 @@
             <hr class="border-gray-100">
 
             {{-- 9. Perubahan --}}
-            <div class="p-4">
+            <div>
                 <h2 class="text-lg font-extrabold text-gray-900 mb-4 uppercase tracking-wide">Perubahan Pemberitahuan Privasi</h2>
                 <p>
                     Pemberitahuan Privasi ini terakhir diperbarui pada Maret 2026. Setiap perubahan pada Pemberitahuan Privasi ini dapat ditemukan di situs web Kami.
@@ -253,7 +247,7 @@
 
             {{-- Tanda Tangan --}}
             <div class="pt-6 text-center border-t border-gray-100">
-                <p class="text-gray-400 text-xs mb-4">Ditetapkan di Bandung pada tanggal Maret 2026</p>
+                <p class="text-gray-400 text-xs pb-20">Ditetapkan di Bandung pada tanggal:</p>
                 <p class="pt-8 pb-8 font-extrabold text-gray-900 text-sm tracking-widest uppercase">Telkom University <br> Rektor</p>
             </div>
 

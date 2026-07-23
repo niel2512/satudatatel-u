@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganisasiController;
+use App\Http\Controllers\DataOwnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,6 @@ Route::get('/berita/{slug}', function ($slug) {
 Route::get('/kebijakan-privasi', function () {
     return view('kebijakan-privasi.index');
 })->name('kebijakan-privasi');
+
+Route::get('/data-owner', [DataOwnerController::class, 'index'])->name('data-owner');
+Route::get('/data-owner/{slug}', [DataOwnerController::class, 'show'])->name('data-owner.show');

@@ -10,10 +10,10 @@ class HomeController extends Controller
     {
         // Static placeholder stats (will be replaced with DB queries in future iterations)
         $stats = [
-            'total_directorates' => 1517,
-            'total_datasets'     => 46246,
-            'total_students'     => 96203,
-            'total_data_owners'  => 55,
+            'total_directorates' => 1598,
+            'total_datasets'     => 41687,
+            'total_students'     => 102191,
+            'total_data_owners'  => 70,
         ];
 
         // Placeholder content (will be replaced with SiteContent model in future iterations)

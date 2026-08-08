@@ -7,6 +7,7 @@ use App\Http\Controllers\DataOwnerController;
 use App\Http\Controllers\DataGovernanceController;
 use App\Http\Controllers\KebijakanPrivasiController;
 use App\Http\Controllers\KatalogDatasetController;
+use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +33,5 @@ Route::get('/profil', function () {
     return redirect('/');
 })->name('profil');
 
-Route::get('/berita', function () {
-    return redirect('/');
-})->name('berita');
-
-Route::get('/berita/{slug}', function ($slug) {
-    return redirect('/');
-})->name('news.show');
+Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('news.show');

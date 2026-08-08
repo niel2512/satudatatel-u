@@ -73,7 +73,7 @@
                 <div class="border-t border-gray-100 mx-4"></div>
 
                 {{-- Tombol Lihat Data --}}
-                <a href="#"
+                <a href="/katalog-dataset?direktorat={{ urlencode($dir['name']) }}"
                    class="inline-flex items-center gap-1.5 bg-[#C0392B] hover:bg-[#a93226] active:bg-[#8B0000]
                           text-white text-xs font-semibold px-4 py-2 rounded-full w-fit
                           transition-colors duration-200 mt-1">

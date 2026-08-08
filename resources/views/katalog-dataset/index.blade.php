@@ -90,7 +90,9 @@
                         {{-- Kiri: info --}}
                         <div class="flex-1 min-w-0">
                             <h3 class="text-base font-bold text-gray-900 mb-2 leading-snug">
-                                {{ $ds['title'] }}
+                                <a href="{{ route('dataset.show', $ds['slug']) }}" class="hover:text-[#8B0000] transition-colors">
+                                    {{ $ds['title'] }}
+                                </a>
                             </h3>
                             <p class="text-gray-500 text-sm leading-relaxed mb-3">
                                 {{ $ds['desc'] }}
@@ -120,7 +122,7 @@
                                 </span>
                             </div>
                             {{-- Download link --}}
-                            <a href="#" class="text-[#8B0000] text-sm font-semibold hover:underline">
+                            <a href="{{ route('dataset.show', $ds['slug']) }}" class="text-[#8B0000] text-sm font-semibold hover:underline">
                                 Download Dataset
                             </a>
                         </div>

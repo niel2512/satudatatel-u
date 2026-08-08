@@ -28,7 +28,7 @@ Route::get('/data-owner', function () {
 })->name('data-owner');
 
 Route::get('/data-governance', function () {
-    return redirect('/');
+    return view('data-governance.index');
 })->name('data-governance');
 
 Route::get('/katalog-dataset', function () {

@@ -23,13 +23,13 @@ class UserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $navigationLabel = 'Kelola Pengguna';
+    protected static ?string $navigationLabel = 'Kelola User';
 
     protected static ?int $navigationSort = 99;
 
-    protected static ?string $modelLabel = 'Pengguna';
+    protected static ?string $modelLabel = 'Users';
 
-    protected static ?string $pluralModelLabel = 'Pengguna';
+    protected static ?string $pluralModelLabel = 'Users';
 
     // ── Authorization: hanya super_admin yang boleh mengakses ────────
 

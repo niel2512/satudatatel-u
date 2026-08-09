@@ -23,13 +23,13 @@
                 {{-- Article list --}}
                 <div class="space-y-5">
                     @forelse($articles as $article)
-                        <a href="{{ route('news.show', $article['slug']) }}"
+                        <a href="{{ route('news.show', $article->slug) }}"
                            class="group flex gap-0 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200 block">
 
                             {{-- Gambar --}}
                             <div class="w-[220px] flex-shrink-0 overflow-hidden">
-                                <img src="{{ $article['image'] }}"
-                                     alt="{{ $article['title'] }}"
+                                <img src="{{ $article->thumbnail ?? '/images/campus.png' }}"
+                                     alt="{{ $article->title }}"
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                      style="min-height:160px;">
                             </div>
@@ -37,10 +37,10 @@
                             {{-- Konten --}}
                             <div class="flex flex-col justify-center px-6 py-5 flex-1 min-w-0">
                                 <h2 class="text-base font-bold text-gray-900 mb-2 leading-snug group-hover:text-[#8B0000] transition-colors line-clamp-2">
-                                    {{ $article['title'] }}
+                                    {{ $article->title }}
                                 </h2>
                                 <p class="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">
-                                    {{ $article['excerpt'] }}
+                                    {{ $article->excerpt }}
                                 </p>
                                 {{-- Meta --}}
                                 <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-gray-400 text-xs">
@@ -49,19 +49,19 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
                                         </svg>
-                                        {{ $article['kategori'] }}
+                                        {{ $article->category?->name ?? '-' }}
                                     </span>
                                     <span class="flex items-center gap-1">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/>
                                         </svg>
-                                        {{ $article['date'] }}
+                                        {{ $article->published_at?->translatedFormat('d F Y') ?? '-' }}
                                     </span>
                                     <span class="flex items-center gap-1">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
                                         </svg>
-                                        {{ $article['author'] }}
+                                        {{ $article->author }}
                                     </span>
                                 </div>
                             </div>
@@ -75,31 +75,9 @@
                 </div>
 
                 {{-- Pagination --}}
-                @if($totalPages > 1)
-                    <div class="mt-8 flex items-center justify-center gap-1">
-                        @if($page > 1)
-                            <a href="{{ route('berita', array_merge(request()->only('search','kategori'), ['page' => $page - 1])) }}"
-                               class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:border-[#8B0000] hover:text-[#8B0000] text-sm transition-colors">‹</a>
-                        @else
-                            <span class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-100 text-gray-300 text-sm">‹</span>
-                        @endif
-
-                        @for($i = 1; $i <= $totalPages; $i++)
-                            <a href="{{ route('berita', array_merge(request()->only('search','kategori'), ['page' => $i])) }}"
-                               class="w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium border transition-colors
-                                      {{ $i === $page ? 'border-[#8B0000] text-[#8B0000] bg-white' : 'border-gray-200 text-gray-600 hover:border-[#8B0000] hover:text-[#8B0000]' }}">
-                                {{ $i }}
-                            </a>
-                        @endfor
-
-                        @if($page < $totalPages)
-                            <a href="{{ route('berita', array_merge(request()->only('search','kategori'), ['page' => $page + 1])) }}"
-                               class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:border-[#8B0000] hover:text-[#8B0000] text-sm transition-colors">›</a>
-                        @else
-                            <span class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-100 text-gray-300 text-sm">›</span>
-                        @endif
-                    </div>
-                @endif
+                <div class="mt-8">
+                    {{ $articles->withQueryString()->links() }}
+                </div>
 
             </div>{{-- /kiri --}}
 
@@ -142,9 +120,9 @@
                     <h3 class="text-sm font-bold text-gray-900 mb-3">Berita Terkini</h3>
                     <div class="space-y-3">
                         @foreach($terkini as $t)
-                            <a href="{{ route('news.show', $t['slug']) }}"
+                            <a href="{{ route('news.show', $t->slug) }}"
                                class="block text-sm text-gray-700 hover:text-[#8B0000] leading-snug transition-colors py-1 border-b border-gray-50 last:border-0">
-                                {{ $t['title'] }}
+                                {{ $t->title }}
                             </a>
                         @endforeach
                     </div>

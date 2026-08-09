@@ -90,12 +90,12 @@
                         {{-- Kiri: info --}}
                         <div class="flex-1 min-w-0">
                             <h3 class="text-base font-bold text-gray-900 mb-2 leading-snug">
-                                <a href="{{ route('dataset.show', $ds['slug']) }}" class="hover:text-[#8B0000] transition-colors">
-                                    {{ $ds['title'] }}
+                                <a href="{{ route('dataset.show', $ds->slug) }}" class="hover:text-[#8B0000] transition-colors">
+                                    {{ $ds->title }}
                                 </a>
                             </h3>
                             <p class="text-gray-500 text-sm leading-relaxed mb-3">
-                                {{ $ds['desc'] }}
+                                {{ $ds->description }}
                             </p>
                             {{-- Meta --}}
                             <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-gray-400 text-xs mb-4">
@@ -104,32 +104,32 @@
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
                                     </svg>
-                                    {{ $ds['owner'] }}
+                                    {{ $ds->dataOwner?->name ?? '-' }}
                                 </span>
                                 {{-- Direktorat --}}
                                 <span class="flex items-center gap-1">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
                                     </svg>
-                                    {{ $ds['direktorat'] }}
+                                    {{ $ds->directorate?->name ?? '-' }}
                                 </span>
                                 {{-- Tanggal --}}
                                 <span class="flex items-center gap-1">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/>
                                     </svg>
-                                    {{ $ds['date'] }}
+                                    {{ $ds->last_updated_at?->format('d M Y') ?? '-' }}
                                 </span>
                             </div>
-                            {{-- Download link --}}
-                            <a href="{{ route('dataset.show', $ds['slug']) }}" class="text-[#8B0000] text-sm font-semibold hover:underline">
-                                Download Dataset
+                            {{-- Detail link --}}
+                            <a href="{{ route('dataset.show', $ds->slug) }}" class="text-[#8B0000] text-sm font-semibold hover:underline">
+                                Lihat Detail Dataset
                             </a>
                         </div>
 
                         {{-- Kanan: size badge --}}
                         <span class="flex-shrink-0 bg-gray-200 text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap mt-0.5">
-                            {{ $ds['size'] }}
+                            {{ $ds->file_size ?? '-' }}
                         </span>
                     </div>
                 </div>
@@ -142,40 +142,9 @@
         </div>
 
         {{-- Pagination --}}
-        @if($totalPages > 1)
-            <div class="mt-8 flex items-center justify-center gap-1">
-                {{-- Prev --}}
-                @if($page > 1)
-                    <a href="{{ route('katalog-dataset', array_merge(request()->only('search','direktorat'), ['page' => $page - 1])) }}"
-                       class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:border-[#8B0000] hover:text-[#8B0000] text-sm transition-colors">
-                        ‹
-                    </a>
-                @else
-                    <span class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-100 text-gray-300 text-sm cursor-not-allowed">‹</span>
-                @endif
-
-                {{-- Page numbers --}}
-                @for($i = 1; $i <= $totalPages; $i++)
-                    <a href="{{ route('katalog-dataset', array_merge(request()->only('search','direktorat'), ['page' => $i])) }}"
-                       class="w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium transition-colors
-                              {{ $i === $page
-                                    ? 'bg-white border border-[#8B0000] text-[#8B0000]'
-                                    : 'border border-gray-200 text-gray-600 hover:border-[#8B0000] hover:text-[#8B0000]' }}">
-                        {{ $i }}
-                    </a>
-                @endfor
-
-                {{-- Next --}}
-                @if($page < $totalPages)
-                    <a href="{{ route('katalog-dataset', array_merge(request()->only('search','direktorat'), ['page' => $page + 1])) }}"
-                       class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:border-[#8B0000] hover:text-[#8B0000] text-sm transition-colors">
-                        ›
-                    </a>
-                @else
-                    <span class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-100 text-gray-300 text-sm cursor-not-allowed">›</span>
-                @endif
-            </div>
-        @endif
+        <div class="mt-8">
+            {{ $datasets->withQueryString()->links() }}
+        </div>
 
     </div>
 </section>

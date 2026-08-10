@@ -32,16 +32,14 @@ class UsersTable
                     ->label('Role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'super_admin' => 'danger',
-                        'admin_puti'  => 'warning',
-                        'data_owner'  => 'success',
-                        default       => 'gray',
+                        'administrator' => 'danger',
+                        'data_owner'    => 'success',
+                        default         => 'gray',
                     })
                     ->formatStateUsing(fn(string $state): string => match ($state) {
-                        'super_admin' => 'Super Admin',
-                        'admin_puti'  => 'Admin PuTI',
-                        'data_owner'  => 'Data Owner',
-                        default       => $state,
+                        'administrator' => 'Administrator',
+                        'data_owner'    => 'Data Owner',
+                        default         => $state,
                     })
                     ->sortable(),
 
@@ -52,12 +50,11 @@ class UsersTable
                     ->toggleable(),
             ])
             ->filters([
-                SelectFilter::make('role')
+                            SelectFilter::make('role')
                     ->label('Filter Role')
                     ->options([
-                        'super_admin' => 'Super Admin',
-                        'admin_puti'  => 'Admin PuTI',
-                        'data_owner'  => 'Data Owner',
+                        'administrator' => 'Administrator',
+                        'data_owner'    => 'Data Owner',
                     ]),
             ])
             ->recordActions([

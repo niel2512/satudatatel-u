@@ -28,9 +28,8 @@ class UserForm
                     ->label('Role / Peran')
                     ->required()
                     ->options([
-                        'super_admin' => 'Super Admin',
-                        'admin_puti'  => 'Admin PuTI',
-                        'data_owner'  => 'Data Owner',
+                        'administrator' => 'Administrator',
+                        'data_owner'    => 'Data Owner',
                     ])
                     ->default('data_owner')
                     ->native(false),

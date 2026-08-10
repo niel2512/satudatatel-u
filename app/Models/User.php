@@ -14,6 +14,10 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    // Konstanta role yang tersedia
+    const ROLE_ADMINISTRATOR = 'administrator';
+    const ROLE_DATA_OWNER    = 'data_owner';
+
     protected $fillable = [
         'name',
         'email',
@@ -35,30 +39,27 @@ class User extends Authenticatable implements FilamentUser
     }
 
     // ── Role helpers ────────────────────────────────────────────────
-    public function isSuperAdmin(): bool
+    public function isAdministrator(): bool
     {
-        return $this->role === 'super_admin';
-    }
-
-    public function isAdminPuTI(): bool
-    {
-        return $this->role === 'admin_puti';
+        return $this->role === self::ROLE_ADMINISTRATOR;
     }
 
     public function isDataOwner(): bool
     {
-        return $this->role === 'data_owner';
+        return $this->role === self::ROLE_DATA_OWNER;
     }
 
-    public function isAdmin(): bool
+    /**
+     * Alias untuk kompatibilitas — UserResource masih memanggil isSuperAdmin()
+     */
+    public function isSuperAdmin(): bool
     {
-        return in_array($this->role, ['super_admin', 'admin_puti']);
+        return $this->isAdministrator();
     }
 
     // ── Filament gate ────────────────────────────────────────────────
     public function canAccessPanel(Panel $panel): bool
     {
-        // Semua role selain guest boleh masuk ke panel
-        return in_array($this->role, ['super_admin', 'admin_puti', 'data_owner']);
+        return in_array($this->role, [self::ROLE_ADMINISTRATOR, self::ROLE_DATA_OWNER]);
     }
 }

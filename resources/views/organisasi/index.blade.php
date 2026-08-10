@@ -82,7 +82,7 @@
 
         {{-- Member Cards — Grid 3 Kolom Sejajar --}}
         @if($teamMembers->count())
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             @foreach ($teamMembers as $member)
                 <div class="scroll-reveal w-64 md:w-72 mx-auto bg-[#7A1315] rounded-none overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-[1.02]">
                     <div class="w-full h-full aspect-[3/4] bg-gray-100">

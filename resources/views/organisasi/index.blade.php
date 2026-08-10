@@ -61,42 +61,48 @@
         </h2>
 
         {{-- Leader Card — di tengah, lebar sedang --}}
+        @if($teamLeader)
         <div class="flex justify-center mb-8">
             <div class="scroll-reveal w-64 md:w-72">
                 <div class="overflow-hidden bg-gray-200 shadow-md">
                     <img
-                        src="{{ $teamLeader['photo'] }}"
-                        alt="{{ $teamLeader['name'] }}"
+                        src="{{ $teamLeader->photo_url }}"
+                        alt="{{ $teamLeader->name }}"
                         class="w-full h-full object-cover object-top"
                         onerror="this.src='https://placehold.co/600x800/e5e7eb/9ca3af?text=Photo'"
                     >
                 </div>
                 <div class="bg-[#8B0000] px-4 py-4 mt-auto text-center">
-                    <p class="text-white text-sm font-bold leading-tight">{{ $teamLeader['name'] }}</p>
-                    <p class="text-red-200 text-xs mt-0.5">{{ $teamLeader['role'] }}</p>
+                    <p class="text-white text-sm font-bold leading-tight">{{ $teamLeader->name }}</p>
+                    <p class="text-red-200 text-xs mt-0.5">{{ $teamLeader->position }}</p>
                 </div>
             </div>
         </div>
+        @endif
 
         {{-- Member Cards — Grid 3 Kolom Sejajar --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        @if($teamMembers->count())
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
             @foreach ($teamMembers as $member)
                 <div class="scroll-reveal w-64 md:w-72 mx-auto bg-[#7A1315] rounded-none overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-[1.02]">
                     <div class="w-full h-full aspect-[3/4] bg-gray-100">
                         <img
-                            src="{{ $member['photo'] }}"
-                            alt="{{ $member['name'] }}"
+                            src="{{ $member->photo_url }}"
+                            alt="{{ $member->name }}"
                             class="w-full h-full object-cover object-top"
                             onerror="this.src='https://placehold.co/600x800/e5e7eb/9ca3af?text=Photo'"
                         >
                     </div>
                     <div class="bg-[#8B0000] px-4 py-4 text-center mt-auto">
-                        <p class="text-white text-base font-bold tracking-wide leading-snug">{{ $member['name'] }}</p>
-                        <p class="text-red-200 text-xs mt-1">{{ $member['role'] }}</p>
+                        <p class="text-white text-base font-bold tracking-wide leading-snug">{{ $member->name }}</p>
+                        <p class="text-red-200 text-xs mt-1">{{ $member->position }}</p>
                     </div>
                 </div>
             @endforeach
         </div>
+        @else
+            <p class="text-center text-gray-400 text-sm py-8">Belum ada anggota tim. Data dapat dikelola oleh administrator melalui panel admin.</p>
+        @endif
 
     </div>
 </section>

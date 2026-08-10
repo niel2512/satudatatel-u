@@ -110,7 +110,7 @@
 {{-- ========================================================
      STRUKTUR ORGANISASI PuTI
 ======================================================== --}}
-<section class="py-16 bg-gray-100 overflow-x-hidden">
+<section class="py-16 bg-gray-100">
     <div class="scroll-reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <h2 class="text-center text-gray-900 text-2xl font-extrabold mb-10">
@@ -119,21 +119,19 @@
 
         {{-- ROOT NODE --}}
         <div class="flex justify-center">
-            <div class="bg-[#8B0000] text-white text-sm font-bold px-6 py-4 rounded-xl shadow">
+            <div class="bg-[#8B0000] text-white text-[11px] md:text-sm font-bold px-4 md:px-6 py-3 md:py-4 rounded-xl shadow text-center">
                 Direktur Pusat Teknologi Informasi
             </div>
         </div>
 
         {{-- Garis turun dari root ke T-junction --}}
-        <div style="display:flex; justify-content:center; height:32px;">
+        <div style="display:flex; justify-content:center; height:28px;">
             <div style="border-left:1px solid #9ca3af; height:100%;"></div>
         </div>
 
         {{-- T-JUNCTION: bar horizontal + 3 garis turun --}}
-        <div style="position:relative; height:32px; display:flex;">
-            {{-- Bar horizontal absolut dari center col1 ke center col3 --}}
+        <div style="position:relative; height:28px; display:flex;">
             <div style="position:absolute; top:0; left:16.667%; right:16.667%; border-top:1px solid #9ca3af;"></div>
-            {{-- 3 garis vertikal turun dari bar ke masing-masing Kepala Bagian --}}
             <div style="flex:1; display:flex; justify-content:center;">
                 <div style="border-left:1px solid #9ca3af; height:100%;"></div>
             </div>
@@ -148,13 +146,12 @@
         {{-- TIGA KOLOM ISI --}}
         <div style="display:flex;">
 
-            {{-- KOLOM KIRI: Kepala Bagian Pengembangan Produk TI --}}
-            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 12px;">
-                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-xs font-bold px-4 py-3 rounded-xl text-center leading-snug">
+            {{-- KOLOM KIRI --}}
+            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 3px;">
+                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-[9px] md:text-xs font-bold px-1 md:px-3 py-2 md:py-3 rounded-xl text-center leading-snug">
                     Kepala Bagian Pengembangan Produk TI
                 </div>
-                {{-- garis turun ke child pertama --}}
-                <div style="display:flex; justify-content:center; height:20px; width:100%;">
+                <div style="display:flex; justify-content:center; height:16px; width:100%;">
                     <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                 </div>
                 @foreach([
@@ -165,23 +162,23 @@
                     'UI/UX Designer',
                     'Technical Writer',
                 ] as $c)
-                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-xs font-semibold px-4 py-2.5 rounded-xl text-center">
+                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-[9px] md:text-xs font-semibold px-1 md:px-3 py-1.5 md:py-2.5 rounded-xl text-center leading-snug">
                         {{ $c }}
                     </div>
                     @if(!$loop->last)
-                        <div style="display:flex; justify-content:center; height:10px; width:100%;">
+                        <div style="display:flex; justify-content:center; height:8px; width:100%;">
                             <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                         </div>
                     @endif
                 @endforeach
             </div>
 
-            {{-- KOLOM TENGAH: Kepala Bagian Riset dan Layanan TI --}}
-            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 12px;">
-                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-xs font-bold px-4 py-3 rounded-xl text-center leading-snug">
+            {{-- KOLOM TENGAH --}}
+            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 3px;">
+                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-[9px] md:text-xs font-bold px-1 md:px-3 py-2 md:py-3 rounded-xl text-center leading-snug">
                     Kepala Bagian Riset dan Layanan TI
                 </div>
-                <div style="display:flex; justify-content:center; height:20px; width:100%;">
+                <div style="display:flex; justify-content:center; height:16px; width:100%;">
                     <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                 </div>
                 @foreach([
@@ -189,34 +186,34 @@
                     'Back End Developer',
                     'Data Management',
                 ] as $c)
-                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-xs font-semibold px-4 py-2.5 rounded-xl text-center">
+                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-[9px] md:text-xs font-semibold px-1 md:px-3 py-1.5 md:py-2.5 rounded-xl text-center leading-snug">
                         {{ $c }}
                     </div>
                     @if(!$loop->last)
-                        <div style="display:flex; justify-content:center; height:10px; width:100%;">
+                        <div style="display:flex; justify-content:center; height:8px; width:100%;">
                             <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                         </div>
                     @endif
                 @endforeach
             </div>
 
-            {{-- KOLOM KANAN: Kepala Bagian Infrastruktur TI --}}
-            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 12px;">
-                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-xs font-bold px-4 py-3 rounded-xl text-center leading-snug">
+            {{-- KOLOM KANAN --}}
+            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; padding:0 3px;">
+                <div class="w-full border-2 border-[#8B0000] text-[#8B0000] text-[9px] md:text-xs font-bold px-1 md:px-3 py-2 md:py-3 rounded-xl text-center leading-snug">
                     Kepala Bagian Infrastruktur TI
                 </div>
-                <div style="display:flex; justify-content:center; height:20px; width:100%;">
+                <div style="display:flex; justify-content:center; height:16px; width:100%;">
                     <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                 </div>
                 @foreach([
                     'Kepala Urusan Pusat Data',
                     'Staff Urusan Pusat Data',
                 ] as $c)
-                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-xs font-semibold px-4 py-2.5 rounded-xl text-center">
+                    <div class="w-full border border-gray-300 bg-white text-[#8B0000] text-[9px] md:text-xs font-semibold px-1 md:px-3 py-1.5 md:py-2.5 rounded-xl text-center leading-snug">
                         {{ $c }}
                     </div>
                     @if(!$loop->last)
-                        <div style="display:flex; justify-content:center; height:10px; width:100%;">
+                        <div style="display:flex; justify-content:center; height:8px; width:100%;">
                             <div style="border-left:1px solid #9ca3af; height:100%;"></div>
                         </div>
                     @endif

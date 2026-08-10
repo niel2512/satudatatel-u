@@ -6,12 +6,12 @@
 
 @section('content')
 
-<section class="py-12 bg-[#F8F9FA] min-h-screen scroll-reveal">
+<section class="pt-16 pb-20 bg-[#F8F9FA] min-h-screen scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="mb-6">
-            <h1 class="text-2xl font-extrabold text-gray-900 uppercase tracking-tight mb-1">
+            <h1 class="text-2xl font-extrabold text-[#8B0000] uppercase tracking-tight mb-3">
                 Data Owner
             </h1>
             <p class="text-gray-500 text-sm">
@@ -41,7 +41,7 @@
 
         {{-- Grid kartu --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    @foreach($directorates as $dir)
+    @foreach($direktorats as $dir)
         <div class="py-10 group flex flex-col bg-white rounded-2xl border border-gray-150 shadow-sm
                     hover:shadow-md transition-all duration-300 hover:-translate-y-1
                     min-h-[220px] scroll-reveal overflow-hidden">

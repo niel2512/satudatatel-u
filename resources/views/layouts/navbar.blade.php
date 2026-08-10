@@ -73,8 +73,8 @@
 
             {{-- ======= KANAN: Search + Login (flex-none) ======= --}}
             <div class="hidden lg:flex items-center gap-3 flex-none">
-                {{-- Search Input --}}
-                <div class="relative">
+                {{-- Search Form --}}
+                <form method="GET" action="{{ route('search') }}" class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -82,13 +82,14 @@
                     </div>
                     <input
                         type="text"
+                        name="q"
                         id="navbar-search"
                         placeholder="Cari"
                         class="pl-9 pr-4 py-2 text-sm bg-gray-100 border border-transparent rounded-lg text-gray-700 placeholder-gray-400
                                focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] focus:bg-white
                                transition-all duration-200 w-52 focus:w-52"
                     >
-                </div>
+                </form>
 
                 {{-- Login Button --}}
                 <a href="/admin"
@@ -117,14 +118,14 @@
     <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white">
         {{-- Search mobile --}}
         <div class="px-4 pt-3">
-            <div class="relative">
+            <form method="GET" action="{{ route('search') }}" class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
-                <input type="text" placeholder="Cari..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30">
-            </div>
+                <input type="text" name="q" placeholder="Cari..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30">
+            </form>
         </div>
 
         <div class="px-4 py-3 space-y-0.5">

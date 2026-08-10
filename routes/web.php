@@ -8,6 +8,7 @@ use App\Http\Controllers\DataGovernanceController;
 use App\Http\Controllers\KebijakanPrivasiController;
 use App\Http\Controllers\KatalogDatasetController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,5 @@ Route::get('/profil', function () {
 
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('news.show');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');

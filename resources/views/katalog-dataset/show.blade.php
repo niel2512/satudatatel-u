@@ -43,6 +43,19 @@
             </div>
         </div>
 
+        {{-- ── Tautan Unduh ── --}}
+        @if($dataset->download_url)
+            <div class="mb-10">
+                <a href="{{ $dataset->download_url }}" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 bg-[#8B0000] hover:bg-[#6B0000] text-white text-sm font-semibold px-5 py-3 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V3.75m0 12.75 4.5-4.5M12 16.5l-4.5-4.5M3.75 18.75v.75a2.25 2.25 0 0 0 2.25 2.25h12a2.25 2.25 0 0 0 2.25-2.25v-.75"/>
+                    </svg>
+                    Unduh Dataset
+                </a>
+            </div>
+        @endif
+
         {{-- ── Preview Dataset ── --}}
         <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
             <h2 class="text-base font-bold text-gray-900">Preview Dataset</h2>

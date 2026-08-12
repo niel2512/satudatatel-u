@@ -43,6 +43,11 @@ class UsersTable
                     })
                     ->sortable(),
 
+                TextColumn::make('dataOwner.name')
+                    ->label('Data Owner')
+                    ->placeholder('-')
+                    ->toggleable(),
+
                 TextColumn::make('created_at')
                     ->label('Terdaftar')
                     ->dateTime('d M Y')

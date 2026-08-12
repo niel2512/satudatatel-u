@@ -39,14 +39,13 @@ class SearchController extends Controller
 
         // ── Cari Dataset ───────────────────────────────────────────────
         $results['dataset'] = Dataset::published()
-            ->with(['directorate', 'dataOwner', 'category'])
+            ->with(['directorate', 'dataOwner'])
             ->where(function ($q) use ($query) {
                 $q->where('title', 'like', "%{$query}%")
                   ->orWhere('description', 'like', "%{$query}%")
                   ->orWhere('description_detail', 'like', "%{$query}%")
                   ->orWhereHas('directorate', fn($q) => $q->where('name', 'like', "%{$query}%"))
-                  ->orWhereHas('dataOwner', fn($q) => $q->where('name', 'like', "%{$query}%"))
-                  ->orWhereHas('category', fn($q) => $q->where('name', 'like', "%{$query}%"));
+                  ->orWhereHas('dataOwner', fn($q) => $q->where('name', 'like', "%{$query}%"));
             })
             ->limit(5)
             ->get();

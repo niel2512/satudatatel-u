@@ -34,6 +34,15 @@ class UserForm
                     ->default('data_owner')
                     ->native(false),
 
+                Select::make('data_owner_id')
+                    ->label('Profil Data Owner')
+                    ->relationship('dataOwner', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->visible(fn (callable $get): bool => $get('role') === 'data_owner')
+                    ->required(fn (callable $get): bool => $get('role') === 'data_owner')
+                    ->helperText('Pilih profil Data Owner yang diwakili oleh akun ini.'),
+
                 TextInput::make('password')
                     ->label('Password')
                     ->password()

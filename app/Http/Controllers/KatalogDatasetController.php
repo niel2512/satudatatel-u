@@ -15,7 +15,7 @@ class KatalogDatasetController extends Controller
         $perPage   = 3;
 
         $query = Dataset::published()
-            ->with(['directorate', 'dataOwner', 'category'])
+            ->with(['directorate', 'dataOwner'])
             ->orderByDesc('last_updated_at');
 
         if ($search) {
@@ -41,7 +41,7 @@ class KatalogDatasetController extends Controller
     public function show(string $slug): \Illuminate\View\View
     {
         $dataset = Dataset::published()
-            ->with(['directorate', 'dataOwner', 'category'])
+            ->with(['directorate', 'dataOwner'])
             ->where('slug', $slug)
             ->firstOrFail();
 

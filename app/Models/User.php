@@ -6,6 +6,7 @@ use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,6 +23,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'role',
+        'data_owner_id',
         'password',
     ];
 
@@ -47,6 +49,14 @@ class User extends Authenticatable implements FilamentUser
     public function isDataOwner(): bool
     {
         return $this->role === self::ROLE_DATA_OWNER;
+    }
+
+    /**
+     * Profil Data Owner yang diwakili oleh akun ini.
+     */
+    public function dataOwner(): BelongsTo
+    {
+        return $this->belongsTo(DataOwner::class);
     }
 
     /**

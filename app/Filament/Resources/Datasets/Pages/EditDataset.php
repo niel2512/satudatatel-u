@@ -16,4 +16,9 @@ class EditDataset extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        return CreateDataset::fillFileMetadata($data);
+    }
 }

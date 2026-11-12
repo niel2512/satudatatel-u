@@ -19,6 +19,7 @@ class Dataset extends Model
         'data_format',
         'file_size',
         'download_url',
+        'file_path',
         'status',
         'last_updated_at',
     ];

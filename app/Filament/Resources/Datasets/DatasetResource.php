@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Datasets;
 use App\Filament\Resources\Datasets\Pages\CreateDataset;
 use App\Filament\Resources\Datasets\Pages\EditDataset;
 use App\Filament\Resources\Datasets\Pages\ListDatasets;
+use App\Filament\Resources\Datasets\Pages\ViewDataset;
 use App\Filament\Resources\Datasets\Schemas\DatasetForm;
 use App\Filament\Resources\Datasets\Tables\DatasetsTable;
 use App\Models\Dataset;
@@ -30,26 +31,56 @@ class DatasetResource extends Resource
 
     protected static ?int $navigationSort = 20;
 
-    public static function shouldRegisterNavigation(): bool
-    {
-        return Auth::check() && (Auth::user()->isAdministrator() || Auth::user()->isDataOwner());
-    }
-
+    // ── KUNCI UTAMA: Filter query berdasarkan role ───────────────────
     /**
-     * Administrator sees every dataset. A data owner only sees the datasets
-     * assigned to the Data Owner profile linked to their account.
+     * Administrator → melihat semua dataset.
+     * Data Owner    → hanya dataset yang data_owner_id-nya milik dia.
      */
     public static function getEloquentQuery(): Builder
     {
-        $query = parent::getEloquentQuery();
+        $query = parent::getEloquentQuery()
+            ->with(['directorate', 'dataOwner']);
+
         $user = Auth::user();
 
-        if ($user?->isDataOwner()) {
-            $query->where('data_owner_id', $user->data_owner_id);
+        if ($user->isDataOwner() && $user->dataOwner) {
+            $query->where('data_owner_id', $user->dataOwner->id);
         }
 
         return $query;
     }
+
+    // ── Otorisasi ────────────────────────────────────────────────────
+    /** Semua user yang login boleh lihat menu ini */
+    public static function canViewAny(): bool
+    {
+        return Auth::check();
+    }
+
+    /** Data Owner hanya bisa edit dataset miliknya (sudah dijamin query) */
+    public static function canEdit($record): bool
+    {
+        $user = Auth::user();
+
+        if ($user->isAdministrator()) {
+            return true;
+        }
+
+        // Pastikan record ini milik data_owner yang login
+        return $user->dataOwner?->id === $record->data_owner_id;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canEdit($record);
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return Auth::check();
+    }
+
+    // ────────────────────────────────────────────────────────────────
 
     public static function form(Schema $schema): Schema
     {
@@ -69,9 +100,10 @@ class DatasetResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListDatasets::route('/'),
+            'index'  => ListDatasets::route('/'),
             'create' => CreateDataset::route('/create'),
-            'edit' => EditDataset::route('/{record}/edit'),
+            'view'   => ViewDataset::route('/{record}'),
+            'edit'   => EditDataset::route('/{record}/edit'),
         ];
     }
 }

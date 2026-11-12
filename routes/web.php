@@ -23,6 +23,7 @@ Route::get('/data-owner/{slug}', [DataOwnerController::class, 'show'])->name('da
 Route::get('/data-governance', [DataGovernanceController::class, 'index'])->name('data-governance');
 Route::get('/katalog-dataset', [KatalogDatasetController::class, 'index'])->name('katalog-dataset');
 Route::get('/katalog-dataset/{slug}', [KatalogDatasetController::class, 'show'])->name('dataset.show');
+Route::get('/katalog-dataset/{slug}/download', [KatalogDatasetController::class, 'download'])->name('dataset.download');
 Route::get('/kebijakan-privasi', [KebijakanPrivasiController::class, 'index'])->name('kebijakan-privasi');
 
 // Stub routes — akan diimplementasi di iterasi berikutnya

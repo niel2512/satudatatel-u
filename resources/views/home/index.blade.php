@@ -430,7 +430,8 @@
                     ],
                     [
                         'title' => 'Direktorat Pengelola Dana Abadi',
-                        'image' => '/images/logo-dir-pda.png',                        'url' => '/direktorat/pengelola-dana-abadi',
+                        'image' => '/images/logo-dir-pda.png',                        
+                        'url' => '/direktorat/pengelola-dana-abadi',
                     ],
                 ];
             @endphp

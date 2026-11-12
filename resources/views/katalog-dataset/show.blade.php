@@ -43,8 +43,18 @@
             </div>
         </div>
 
-        {{-- ── Tautan Unduh ── --}}
-        @if($dataset->download_url)
+        {{-- ── Tombol Unduh ── --}}
+        @if($dataset->file_path)
+            <div class="mb-10">
+                <a href="{{ route('dataset.download', $dataset->slug) }}"
+                   class="inline-flex items-center gap-2 bg-[#8B0000] hover:bg-[#6B0000] text-white text-sm font-semibold px-5 py-3 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V3.75m0 12.75 4.5-4.5M12 16.5l-4.5-4.5M3.75 18.75v.75a2.25 2.25 0 0 0 2.25 2.25h12a2.25 2.25 0 0 0 2.25-2.25v-.75"/>
+                    </svg>
+                    Unduh Dataset
+                </a>
+            </div>
+        @elseif($dataset->download_url)
             <div class="mb-10">
                 <a href="{{ $dataset->download_url }}" target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center gap-2 bg-[#8B0000] hover:bg-[#6B0000] text-white text-sm font-semibold px-5 py-3 rounded-lg transition-colors">
@@ -59,38 +69,53 @@
         {{-- ── Preview Dataset ── --}}
         <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
             <h2 class="text-base font-bold text-gray-900">Preview Dataset</h2>
-            <span class="text-xs text-gray-400">Menampilkan data sampel dari dataset ini</span>
+            @if(count($previewRows) > 0)
+                <span class="text-xs text-gray-400">Menampilkan {{ count($previewRows) }} baris pertama dari dataset</span>
+            @else
+                <span class="text-xs text-gray-400">Menampilkan data sampel dari dataset ini</span>
+            @endif
         </div>
 
-        {{-- ── Tabel Preview Sampel ── --}}
-        <div class="border border-gray-200 rounded-xl overflow-x-auto mb-6">
-            <table class="w-full text-sm">
-                <thead>
-                    <tr class="bg-gray-50 border-b border-gray-200">
-                        <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap w-12">No.</th>
-                        <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">Kolom A</th>
-                        <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">Kolom B</th>
-                        <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">Kolom C</th>
-                        <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">Kolom D</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @for($i = 1; $i <= 5; $i++)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-5 py-4 text-gray-500 font-medium">{{ $i }}</td>
-                        <td class="px-5 py-4 text-gray-700">Data {{ $i }}-A</td>
-                        <td class="px-5 py-4 text-gray-700">Data {{ $i }}-B</td>
-                        <td class="px-5 py-4 text-gray-700">Data {{ $i }}-C</td>
-                        <td class="px-5 py-4 text-gray-700">Data {{ $i }}-D</td>
-                    </tr>
-                    @endfor
-                </tbody>
-            </table>
-        </div>
+        {{-- ── Tabel Preview ── --}}
+        @if(count($previewHeaders) > 0 && count($previewRows) > 0)
+            <div class="border border-gray-200 rounded-xl overflow-x-auto mb-6">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap w-12">No.</th>
+                            @foreach($previewHeaders as $header)
+                                <th class="px-5 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">
+                                    {{ $header ?? '-' }}
+                                </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @foreach($previewRows as $index => $row)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-5 py-4 text-gray-500 font-medium">{{ $index + 1 }}</td>
+                                @foreach($row as $cell)
+                                    <td class="px-5 py-4 text-gray-700">{{ $cell ?? '' }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-        <p class="text-xs text-gray-400 text-center mb-10">
-            * Ini adalah preview sampel. Hubungi Data Owner untuk mengakses dataset lengkap.
-        </p>
+            <p class="text-xs text-gray-400 text-center mb-10">
+                * Preview menampilkan maksimal 5 baris pertama. Unduh dataset untuk data lengkap.
+            </p>
+        @else
+            <div class="border border-gray-200 rounded-xl p-10 text-center mb-10">
+                <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+                </svg>
+                <p class="text-sm text-gray-400">Belum ada file dataset yang diupload untuk preview.</p>
+                <p class="text-xs text-gray-300 mt-1">Hubungi Data Owner untuk informasi lebih lanjut.</p>
+            </div>
+        @endif
+
 
         {{-- ── Log Perubahan ── --}}
         <div class="mb-6">

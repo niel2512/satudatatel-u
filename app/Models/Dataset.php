@@ -15,6 +15,7 @@ class Dataset extends Model
         'description_detail',
         'directorate_id',
         'data_owner_id',
+        'category_id',
         'data_format',
         'file_size',
         'download_url',

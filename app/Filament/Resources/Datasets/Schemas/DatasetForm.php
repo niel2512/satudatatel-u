@@ -2,82 +2,153 @@
 
 namespace App\Filament\Resources\Datasets\Schemas;
 
+use App\Models\DataCategory;
+use App\Models\DataOwner;
+use App\Models\Directorate;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DatasetForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema->components([
-            TextInput::make('title')
-                ->label('Judul Dataset')
-                ->required()
-                ->maxLength(255),
+        $user = Auth::user();
 
-            TextInput::make('slug')
-                ->label('Slug')
-                ->maxLength(255)
-                ->unique(ignoreRecord: true)
-                ->helperText('Kosongkan agar dibuat otomatis dari judul.'),
+        return $schema
+            ->columns(2)
+            ->components([
 
-            Textarea::make('description')
-                ->label('Deskripsi Singkat')
-                ->required()
-                ->rows(3)
-                ->maxLength(1000)
-                ->columnSpanFull(),
+                // ── Judul ──────────────────────────────────────────
+                TextInput::make('title')
+                    ->label('Judul Dataset')
+                    ->required()
+                    ->maxLength(200)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn ($state, callable $set) =>
+                        $set('slug', Str::slug($state))
+                    )
+                    ->columnSpanFull(),
 
-            RichEditor::make('description_detail')
-                ->label('Deskripsi Lengkap')
-                ->columnSpanFull(),
+                // ── Slug (readonly) ─────────────────────────────────
+                TextInput::make('slug')
+                    ->label('Slug URL')
+                    ->required()
+                    ->maxLength(200)
+                    ->disabled()
+                    ->dehydrated()
+                    ->helperText('Otomatis diisi dari judul.'),
 
-            Select::make('data_owner_id')
-                ->label('Data Owner')
-                ->relationship('dataOwner', 'name')
-                ->searchable()
-                ->preload()
-                ->required(fn (): bool => Auth::user()?->isAdministrator())
-                ->visible(fn (): bool => Auth::user()?->isAdministrator()),
+                // ── Status ──────────────────────────────────────────
+                Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'draft'     => 'Draft',
+                        'published' => 'Published',
+                    ])
+                    ->default('draft')
+                    ->required()
+                    ->native(false),
 
-            Select::make('data_format')
-                ->label('Format Data')
-                ->options([
-                    'CSV' => 'CSV',
-                    'JSON' => 'JSON',
-                    'Excel' => 'Excel',
-                    'PDF' => 'PDF',
-                    'Lainnya' => 'Lainnya',
-                ]),
+                // ── Direktorat ──────────────────────────────────────
+                Select::make('directorate_id')
+                    ->label('Direktorat')
+                    ->options(function () use ($user) {
+                        // data_owner hanya bisa pilih direktorat miliknya
+                        if ($user->isDataOwner() && $user->dataOwner) {
+                            return Directorate::where('id', $user->dataOwner->directorate_id)
+                                ->pluck('name', 'id');
+                        }
+                        return Directorate::ordered()->pluck('name', 'id');
+                    })
+                    ->default(function () use ($user) {
+                        return $user->isDataOwner()
+                            ? $user->dataOwner?->directorate_id
+                            : null;
+                    })
+                    ->disabled(fn () => $user->isDataOwner())
+                    ->dehydrated()
+                    ->required()
+                    ->searchable()
+                    ->native(false),
 
-            TextInput::make('file_size')
-                ->label('Ukuran Data')
-                ->maxLength(20)
-                ->placeholder('Contoh: 2.4 MB'),
+                // ── Data Owner ──────────────────────────────────────
+                Select::make('data_owner_id')
+                    ->label('Data Owner')
+                    ->options(function () use ($user) {
+                        if ($user->isDataOwner() && $user->dataOwner) {
+                            return DataOwner::where('id', $user->dataOwner->id)
+                                ->pluck('name', 'id');
+                        }
+                        return DataOwner::active()->with('directorate')
+                            ->get()
+                            ->mapWithKeys(fn ($do) => [
+                                $do->id => $do->name . ' (' . ($do->directorate?->name ?? '-') . ')'
+                            ]);
+                    })
+                    ->default(function () use ($user) {
+                        return $user->isDataOwner() ? $user->dataOwner?->id : null;
+                    })
+                    ->disabled(fn () => $user->isDataOwner())
+                    ->dehydrated()
+                    ->searchable()
+                    ->native(false),
 
-            TextInput::make('download_url')
-                ->label('Tautan Unduh')
-                ->url()
-                ->maxLength(2048)
-                ->placeholder('https://...')
-                ->helperText('Masukkan tautan file atau halaman akses dataset.'),
+                // ── Kategori ────────────────────────────────────────
+                Select::make('category_id')
+                    ->label('Kategori Data')
+                    ->options(DataCategory::pluck('name', 'id'))
+                    ->searchable()
+                    ->native(false),
 
-            Select::make('status')
-                ->label('Status Publikasi')
-                ->required()
-                ->options([
-                    'draft' => 'Draft',
-                    'published' => 'Dipublikasikan',
-                ])
-                ->default('draft'),
+                // ── Format ──────────────────────────────────────────
+                Select::make('data_format')
+                    ->label('Format Data')
+                    ->options([
+                        'CSV'   => 'CSV',
+                        'JSON'  => 'JSON',
+                        'Excel' => 'Excel',
+                        'PDF'   => 'PDF',
+                        'XML'   => 'XML',
+                    ])
+                    ->native(false),
 
-            DatePicker::make('last_updated_at')
-                ->label('Tanggal Pembaruan Terakhir'),
-        ]);
+                // ── Ukuran file ─────────────────────────────────────
+                TextInput::make('file_size')
+                    ->label('Ukuran File')
+                    ->placeholder('contoh: 2.4 MB')
+                    ->maxLength(20),
+
+                // ── Tanggal update ──────────────────────────────────
+                DatePicker::make('last_updated_at')
+                    ->label('Tanggal Terakhir Diperbarui')
+                    ->default(now()),
+
+                // ── Deskripsi singkat ───────────────────────────────
+                Textarea::make('description')
+                    ->label('Deskripsi Singkat')
+                    ->required()
+                    ->rows(3)
+                    ->columnSpanFull(),
+
+                // ── Deskripsi detail ────────────────────────────────
+                Textarea::make('description_detail')
+                    ->label('Deskripsi Detail')
+                    ->rows(5)
+                    ->columnSpanFull(),
+
+                // ── URL Download ─────────────────────────────────────
+                TextInput::make('download_url')
+                    ->label('URL Download / Link File')
+                    ->url()
+                    ->maxLength(2048)
+                    ->placeholder('https://...')
+                    ->columnSpanFull(),
+            ]);
     }
 }

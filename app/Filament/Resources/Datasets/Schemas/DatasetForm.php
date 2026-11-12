@@ -6,10 +6,10 @@ use App\Models\DataCategory;
 use App\Models\DataOwner;
 use App\Models\Directorate;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -24,7 +24,6 @@ class DatasetForm
             ->columns(2)
             ->components([
 
-                // ── Judul ──────────────────────────────────────────
                 TextInput::make('title')
                     ->label('Judul Dataset')
                     ->required()
@@ -35,7 +34,6 @@ class DatasetForm
                     )
                     ->columnSpanFull(),
 
-                // ── Slug (readonly) ─────────────────────────────────
                 TextInput::make('slug')
                     ->label('Slug URL')
                     ->required()
@@ -44,7 +42,6 @@ class DatasetForm
                     ->dehydrated()
                     ->helperText('Otomatis diisi dari judul.'),
 
-                // ── Status ──────────────────────────────────────────
                 Select::make('status')
                     ->label('Status')
                     ->options([
@@ -55,11 +52,9 @@ class DatasetForm
                     ->required()
                     ->native(false),
 
-                // ── Direktorat ──────────────────────────────────────
                 Select::make('directorate_id')
                     ->label('Direktorat')
                     ->options(function () use ($user) {
-                        // data_owner hanya bisa pilih direktorat miliknya
                         if ($user->isDataOwner() && $user->dataOwner) {
                             return Directorate::where('id', $user->dataOwner->directorate_id)
                                 ->pluck('name', 'id');
@@ -77,7 +72,6 @@ class DatasetForm
                     ->searchable()
                     ->native(false),
 
-                // ── Data Owner ──────────────────────────────────────
                 Select::make('data_owner_id')
                     ->label('Data Owner')
                     ->options(function () use ($user) {
@@ -99,56 +93,92 @@ class DatasetForm
                     ->searchable()
                     ->native(false),
 
-                // ── Kategori ────────────────────────────────────────
                 Select::make('category_id')
                     ->label('Kategori Data')
                     ->options(DataCategory::pluck('name', 'id'))
                     ->searchable()
                     ->native(false),
 
-                // ── Format ──────────────────────────────────────────
-                Select::make('data_format')
-                    ->label('Format Data')
-                    ->options([
-                        'CSV'   => 'CSV',
-                        'JSON'  => 'JSON',
-                        'Excel' => 'Excel',
-                        'PDF'   => 'PDF',
-                        'XML'   => 'XML',
-                    ])
-                    ->native(false),
-
-                // ── Ukuran file ─────────────────────────────────────
-                TextInput::make('file_size')
-                    ->label('Ukuran File')
-                    ->placeholder('contoh: 2.4 MB')
-                    ->maxLength(20),
-
-                // ── Tanggal update ──────────────────────────────────
                 DatePicker::make('last_updated_at')
                     ->label('Tanggal Terakhir Diperbarui')
                     ->default(now()),
 
-                // ── Deskripsi singkat ───────────────────────────────
                 Textarea::make('description')
                     ->label('Deskripsi Singkat')
                     ->required()
                     ->rows(3)
                     ->columnSpanFull(),
 
-                // ── Deskripsi detail ────────────────────────────────
                 Textarea::make('description_detail')
                     ->label('Deskripsi Detail')
                     ->rows(5)
                     ->columnSpanFull(),
 
-                // ── URL Download ─────────────────────────────────────
-                TextInput::make('download_url')
-                    ->label('URL Download / Link File')
-                    ->url()
-                    ->maxLength(2048)
-                    ->placeholder('https://...')
+                FileUpload::make('file_path')
+                    ->label('File Dataset')
+                    ->directory('datasets')
+                    ->acceptedFileTypes([
+                        'text/csv',
+                        'text/plain',
+                        'application/csv',
+                        'application/vnd.ms-excel',
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    ])
+                    ->maxSize(51200) // 50MB
+                    ->helperText('Upload file CSV atau XLSX (maks 50MB). Format & ukuran file akan terisi otomatis.')
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        if ($state) {
+                            // $state bisa berupa TemporaryUploadedFile atau string path
+                            if (is_string($state)) {
+                                $extension = strtolower(pathinfo($state, PATHINFO_EXTENSION));
+                                $bytes = \Illuminate\Support\Facades\Storage::disk('public')->size($state);
+                            } else {
+                                $extension = strtolower($state->getClientOriginalExtension());
+                                $bytes = $state->getSize();
+                            }
+
+                            $format = match ($extension) {
+                                'csv'  => 'CSV',
+                                'xlsx' => 'Excel',
+                                'xls'  => 'Excel',
+                                default => strtoupper($extension),
+                            };
+                            $set('data_format', $format);
+                            $set('file_size', self::formatFileSize($bytes));
+                        }
+                    })
+                    ->live()
                     ->columnSpanFull(),
+
+                TextInput::make('data_format')
+                    ->label('Format Data')
+                    ->disabled()
+                    ->dehydrated()
+                    ->helperText('Otomatis terisi dari file yang diupload.'),
+
+                TextInput::make('file_size')
+                    ->label('Ukuran File')
+                    ->disabled()
+                    ->dehydrated()
+                    ->helperText('Otomatis terisi dari file yang diupload.'),
             ]);
+    }
+
+    /**
+     * Format bytes ke ukuran yang mudah dibaca.
+     */
+    private static function formatFileSize(int $bytes): string
+    {
+        if ($bytes >= 1073741824) {
+            return number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        if ($bytes >= 1048576) {
+            return number_format($bytes / 1048576, 2) . ' MB';
+        }
+        if ($bytes >= 1024) {
+            return number_format($bytes / 1024, 2) . ' KB';
+        }
+
+        return $bytes . ' B';
     }
 }
